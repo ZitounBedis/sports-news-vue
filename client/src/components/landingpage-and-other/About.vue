@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div>
         
     </div>
@@ -8,6 +8,6 @@ export default {
     name: "About"
 }
 </script>
-<style lang="">
+<style>
     
 </style>
