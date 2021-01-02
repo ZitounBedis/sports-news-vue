@@ -1,16 +1,24 @@
 <template>
   <div id="app">
-    <Landingpage />
+    <!-- <Signin /> -->
+    <Signup />
+    <Footer />
   </div>
 </template>
 
 <script>
-import Landingpage from "./components/landingpage/Landingpage"
+// import Landingpage from "./components/landingpage/Landingpage"
+import Signup from "./components/signin-up/Signup"
+// import Signin from "./components/signin-up/Signin"
+import Footer from "./components/landingpage-and-other/Footer"
 
 export default {
   name: 'App',
   components: {
-    Landingpage
+    // Landingpage,
+    Signup,
+    // Signin,
+    Footer
   },
   data() {
     return{
