@@ -2,23 +2,14 @@
         <div>
             <div id="nav-main-div">
                 <b-navbar toggleable="lg" type="dark" variant="info">
-                <b-navbar-brand href="#">Logo Sport News</b-navbar-brand>
+                <b-navbar-brand href="#"><router-link class="links" to='/'>Logo Sport News</router-link></b-navbar-brand>
             <b-collapse id="nav-collapse" is-nav>
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
                         <b-navbar-nav>
-                            <b-nav-item href="#"> Articles </b-nav-item>
-                            <b-nav-item href="#"> News </b-nav-item>
+                            <b-nav-item href="#"><router-link class="links" to='/'> Home </router-link></b-nav-item>
+                            <b-nav-item href="#"><router-link class="links" to='/signin'> Sign in </router-link></b-nav-item>
                         </b-navbar-nav>
-                        <b-nav-item-dropdown right>
-                        <!-- Using 'button-content' slot -->
-                            <template #button-content>
-                                <em>User</em>
-                            </template>
-                            <b-dropdown-item href="#"> Status </b-dropdown-item>
-                            <b-dropdown-item href="#"> Be Author </b-dropdown-item>
-                            <b-dropdown-item href="#"> Log Out </b-dropdown-item>
-                        </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
             </b-navbar>
@@ -86,16 +77,21 @@
             <div class="center-btn-sing">
                     <b-button-group size="lg">
                         <b-button variant="success" @click="createNewUser">Submit</b-button>
-                        <b-button variant="info">Signin</b-button>
+                        <b-button variant="info"><router-link class="links" to='/signin'> Signin </router-link></b-button>
                     </b-button-group>
             </div>
-        </div>    
+        </div> 
+        <Footer />   
     </div>    
 </template>
 <script>
 import axios from "axios";
+import Footer from '../landingpage-and-other/Footer'
 export default {
-    name: "Singup",
+    name: "Signup",
+    components: {
+        Footer,
+    },
     data() {
         return{
             username: '',
@@ -110,10 +106,11 @@ export default {
                 const newuser = await axios.post('/api/users/signup', {
                     username: this.username,
                     useremail: this.useremail,
-                    password: this.password
+                    useremail: this.useremail
                 })
                 const {data} = newuser
                 alert(`welcome new user : \n-username : ${data.username} \n-useremail : ${data.useremail}`)
+                window.location.replace('/signin');
             } else {
                 alert("there is problem with your password confirmation!")
             }
@@ -122,7 +119,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
 label {
     font-size: 1.4rem;
 }
@@ -145,5 +142,19 @@ label {
 .center-btn-sing{
     margin: 0 40%;
     margin-top: 3.2rem;
+}
+.links{
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1.6rem;
+}
+.links:hover{
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+}
+.links:visited{
+    color: #fff;
+    text-decoration: none;
 }
 </style>
