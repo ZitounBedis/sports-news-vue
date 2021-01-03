@@ -2,15 +2,15 @@
     <div>
         <nav class="nav-landing">
             <div>
-                <h1>Landing logo</h1>
+                <h1><router-link class="links" to='/'>Logo Sport News</router-link></h1>
             </div>
             <div class="nav-menu-landing">
-                <h2>Signin</h2>
+                <h2><router-link class="links" to='/signin'> Sign in </router-link></h2>
                 <h2>About</h2>
             </div>
         </nav>
         <div class="main-landing-img">
-            <button class="button-landing">Sign for the News</button>
+            <button class="button-landing"><router-link class="links" to='/signup'> Sign for the News </router-link></button>
         </div>
         
     </div>
