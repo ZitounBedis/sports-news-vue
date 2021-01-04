@@ -8,8 +8,8 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
                 <b-navbar-nav>
-                    <b-nav-item href="#"> Articles </b-nav-item>
-                    <b-nav-item href="#"> News </b-nav-item>
+                    <b-nav-item @click="switchNews"> News </b-nav-item>
+                    <b-nav-item @click="switchArticle"> Articles </b-nav-item>
                 </b-navbar-nav>
         
                 <b-nav-item-dropdown right>
@@ -17,13 +17,23 @@
                     <template #button-content>
                         <em>{{username}}</em>
                     </template>
-                    <b-dropdown-item href="#"> {{userstatus}} </b-dropdown-item>
-                    <b-dropdown-item href="#" @click="requestAuther"> {{autherRequest}} </b-dropdown-item>
-                    <b-dropdown-item href="#" @click="logout"> Log Out </b-dropdown-item>
+                    <b-dropdown-item > {{userstatus}} </b-dropdown-item>
+                    <b-dropdown-item  @click="requestAuther" v-if="userstatus === 'user'"> {{autherRequest}} </b-dropdown-item>
+                    <b-dropdown-item  v-if="userstatus === 'admin'"><router-link class="links-drop" to='/creatnews'> Post News </router-link></b-dropdown-item>
+                    <b-dropdown-item  v-if="userstatus === 'admin'"><router-link class="links-drop" to='/autherrequest'> Auther requests </router-link></b-dropdown-item>
+                    <b-dropdown-item  v-if="userstatus === 'auther'"><router-link class="links-drop" to='/createarticle'> Post Article </router-link></b-dropdown-item>
+                    <b-dropdown-item  v-if="userstatus === 'auther'"><router-link class="links-drop" to='/myarticles'> My articles </router-link></b-dropdown-item>
+                    <b-dropdown-item  @click="logout"> Log Out </b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
             </b-collapse>
         </b-navbar>
+    </div>
+    <div v-if="showNews">
+        <NewsFeed :news="this.allNews" />
+    </div>
+    <div v-else>
+        <ArticleFeed :articles="this.allArticles" />
     </div>
     <Footer />
 </div>    
@@ -31,10 +41,14 @@
 <script>
 import axios from 'axios'
 import Footer from './Footer'
+import ArticleFeed from '../articles/ArticlesFeed'
+import NewsFeed from '../news/NewsFeed'
 export default {
     name: 'Mainfeed',
     components: {
-        Footer
+        Footer,
+        ArticleFeed,
+        NewsFeed
     },
     data() {
         return{
@@ -43,9 +57,12 @@ export default {
             useremail: '',
             userstatus: '',
             autherRequest: 'Be an Auther',
+            showNews: true,
+            allArticles: [],
+            allNews: []
         }
     },
-    mounted() {
+    async mounted() {
         if(document.cookie){
             let cleancookies = document.cookie.replace('username=', '');
             // console.log(cleancookies)
@@ -62,6 +79,12 @@ export default {
             alert("you are not loged in you'll redirected to Landing page!")
             window.location.replace('/')
         }
+        const articles = await axios.get('/api/articles');
+        const news = await axios.get('/api/news');
+        // console.log(articles.data);
+        // console.log(news.data);
+        this.allArticles = articles.data;
+        this.allNews = news.data;
     },
     methods: {
         logout() {
@@ -84,10 +107,36 @@ export default {
             } else {
                 alert('Please wait until your author request is examined by an Administrator')
             } 
+        },
+         switchArticle(){
+            this.showNews = false;
+            console.log(this.showNews);
+            scroll(0,0)
+        },
+        switchNews(){
+            this.showNews = true;
+            console.log(this.showNews);
+            scroll(0,0)
         }
     }
+   
 }
 </script>
 <style>
-    
+   .links-drop{
+       color: #000;
+       text-emphasis: none;
+       text-decoration: none;
+   }
+   .links-drop:hover{
+       color: #000;
+       text-decoration: none;
+   }
+   .links-drop:active{
+       color: #000;
+       text-decoration: none;
+   }
+   #nav-main-div{
+       z-index: 100;
+   }
 </style>

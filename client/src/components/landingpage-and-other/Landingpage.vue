@@ -1,66 +1,50 @@
 <template>
-    <div>
-        <nav class="nav-landing">
-            <div>
-                <h1><router-link class="links" to='/'>Logo Sport News</router-link></h1>
-            </div>
-            <div class="nav-menu-landing">
-                <h2><router-link class="links" to='/signin'> Sign in </router-link></h2>
-                <h2>About</h2>
-            </div>
-        </nav>
-        <div class="main-landing-img">
-            <button class="button-landing"><router-link class="links" to='/signup'> Sign for the News </router-link></button>
-        </div>
-        
+        <div id="nav-main-div">
+        <b-navbar toggleable="lg" type="dark" variant="info">
+        <b-navbar-brand><router-link class="links" to='/'>Sport News</router-link></b-navbar-brand>
+        <b-collapse id="nav-collapse" is-nav>
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+                <b-navbar-nav>
+                    <b-nav-item ><router-link class="links" to='/signin'> Sign in </router-link></b-nav-item>
+                    <b-nav-item> About Us </b-nav-item>
+                </b-navbar-nav>
+            </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+      <div class="image-div-landing">
+        <b-jumbotron class="jonbo-trans" text-variant="white">
+          <template #header class="jombo-template">Join the TEAM</template>
+          <hr class="my-6">
+          <b-button variant="success" size="lg"><router-link class="links" to='/signup'> SignUp for the news </router-link></b-button>
+        </b-jumbotron>
+      </div> 
     </div>
-</template>
+</template>  
 <script>
-export default {
-    name: "Landingpage"
-}
+  export default {
+    name: "Landingpage",
+  }
 </script>
 <style>
-    .nav-landing{
-        position: fixed;
-        top: 0;
-        width: 100%;
-        padding: .1rem 4rem;
-        display: flex;
-        justify-content: space-between;
-        background-color: #F2A663;
-        height: 6hv;
-    }
-    .nav-menu-landing{
-        display: flex;
-        justify-content: space-between;
-    }
-    .nav-menu-landing h2{
-        margin-right: 3rem;
-        cursor: pointer;
-    }
-    .main-landing-img{
-        width:100%;
-        height: 100vh;
-        background: url("https://i.imgur.com/tPa2mWx.jpg") no-repeat 80%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .button-landing{
-        width: 18%;
-        height: 2.8rem;
-        background: transparent;
-        border: #F28D52 solid 3px;
-        border-radius: 3px;
-        color: #F28D52;
-        font-weight: 600;
-        margin: 0 0 8rem 12rem;
-    }
-    .button-landing:hover{
-        background: #F28D52;
-        border: #F2F2F2 solid 4px;
-        color: #F2F2F2;
-        font-weight: 800;
-    }
+#nav-main-div{
+  width : 100%;
+  position: fixed;
+  top: 0;
+}
+.image-div-landing{
+  width: 100vw;
+  height: 100vh;
+  margin:0;
+  padding:0;
+  background: url("https://free4kwallpapers.com/uploads/originals/2020/02/27/beautiful-stadium-photo-wallpaper.jpg") no-repeat 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.jonbo-trans{
+  margin-right: 16rem;
+  margin-bottom: 12rem;
+  background: transparent;
+}
 </style>

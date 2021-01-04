@@ -2,7 +2,17 @@ const { Router } = require('express');
 const Userdata = require('../../models/userdata');
 
 const router = Router();
-//------------------ get user ---------------------
+//------------------ get pending auther users -----------
+
+router.get('/', async (req, res) => {
+    try{
+        const pendingUsers = await Userdata.find({autherRequest: "pending"});
+        if(!pendingUsers) throw new Error('Err problrm with finding user pending !');
+        res.status(200).json(pendingUsers);
+    } catch (err){
+        res.status(500).json({message: err.message})
+    }
+})
 
 //------------------ SingUp process ---------------------
 
