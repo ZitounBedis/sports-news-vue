@@ -3,7 +3,7 @@
 const { Schema, model } = require('mongoose');
 
 const ArticleShema = new Schema({
-    title : {
+    title: {
         type: 'string',
         required: true
     },
@@ -12,6 +12,10 @@ const ArticleShema = new Schema({
         required: true
     },
     text: {
+        type: 'string',
+        required: true
+    },
+    creator:{
         type: 'string',
         required: true
     },

@@ -18,6 +18,19 @@ router.get('/', async (req, res) => {
     }
 });
 
+//------------ get one news ----------------
+
+router.get('/:id', async (req, res) => {
+    const { id } = req.params
+    try{
+        const onenews = await News.findById(id);
+        if(!onenews) throw new Error('No news to display Err !');
+        res.status(200).json(onenews);
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+});
+
 //------------ create an news ------------------
 
 router.post('/', async (req, res) =>{
