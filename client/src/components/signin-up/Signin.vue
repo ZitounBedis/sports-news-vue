@@ -14,7 +14,7 @@
             </b-collapse>
             </b-navbar>
         </div>
-        <div id="create-article-div">
+        <div id="create-signin-div">
             <h1 class="text-center space-h1">Signin form</h1>
             <b-container fluid>
 
@@ -101,10 +101,11 @@ label {
     position: fixed;
     top: 0;
 }
-#create-article-div{
+#create-signin-div{
     width : 56%;
     margin: auto;
-    margin-top: 16rem;
+    margin-top: 13.4rem;
+    margin-bottom: 3rem;
     border: solid 1.2px;
     border-radius: 4px;
     padding: 4.2rem;

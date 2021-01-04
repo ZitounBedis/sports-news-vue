@@ -14,7 +14,7 @@
             </b-collapse>
             </b-navbar>
         </div>
-        <div id="create-article-div">
+        <div id="create-signup-div">
             <h1 class="text-center space-h1">Signup form</h1>
             <b-container fluid>
                 <b-row class="my-1">
@@ -106,7 +106,7 @@ export default {
                 const newuser = await axios.post('/api/users/signup', {
                     username: this.username,
                     useremail: this.useremail,
-                    useremail: this.useremail
+                    password: this.password
                 })
                 const {data} = newuser
                 alert(`welcome new user : \n-username : ${data.username} \n-useremail : ${data.useremail}`)
@@ -128,13 +128,14 @@ label {
     position: fixed;
     top: 0;
 }
-#create-article-div{
+#create-signup-div{
     width : 56%;
     margin: auto;
-    margin-top: 16rem;
     border: solid 1.2px;
     border-radius: 4px;
     padding: 4.2rem;
+    margin-top: 6rem;
+    margin-bottom: 4rem;
 }
 .space-h1 {
     margin-bottom: 3.6rem;

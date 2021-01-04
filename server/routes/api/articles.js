@@ -18,6 +18,36 @@ router.get('/', async (req, res) => {
     }
 });
 
+//------------ get My articles ----------------
+
+router.get('/myarticles/:id', async (req, res) => {
+    const { id } = req.params
+    try{
+        const myArticles = await Article.find({creator : id});
+        if(!myArticles) throw new Error('No articles to display Err !');
+        const mysorted =  myArticles.sort((a, b) => {
+            return new Date(a.date).getTime() - new Date(b.date).getTime()
+        })
+        res.status(200).json(mysorted);
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+});
+
+
+//------------ get one article ----------------
+
+router.get('/:id', async (req, res) => {
+    const { id } = req.params
+    try{
+        const onearticle = await Article.findById(id);
+        if(!onearticle) throw new Error('No news to display Err !');
+        res.status(200).json(onearticle);
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+});
+
 //------------ create an article ------------------
 
 router.post('/', async (req, res) =>{
